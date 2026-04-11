@@ -1,0 +1,81 @@
+:root { 
+    --pico-font-family: 'Inter', sans-serif; 
+    /* Enables smooth scrolling for anchor links */
+    scroll-behavior: smooth;
+}
+        
+        nav ul {
+            align-items: center;
+        }
+
+        /* Tabbing Graphics for Nav */
+        nav ul li a,
+        nav details summary {
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            transition: background 0.3s ease;
+        }
+        nav ul li a:hover,
+        nav details summary:hover {
+            background: var(--pico-secondary-hover-background);
+            color: var(--pico-secondary-inverse);
+            text-decoration: none;
+        }
+
+        .running-stat { border-left: 4px solid var(--pico-primary); padding-left: 1rem; margin-top: 2rem; }
+        header { padding: 3rem 0; text-align: center; }
+        section { padding: 2.5rem 0; }
+        
+        .project-card { 
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        
+        .metric { font-weight: bold; color: var(--pico-primary); }
+
+        /* Footer Social Icons */
+        .footer-social ul {
+            display: flex;
+            gap: 1.5rem;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .footer-social a {
+            color: var(--pico-secondary);
+            transition: color 0.3s ease;
+        }
+
+        .footer-social a:hover {
+            color: var(--pico-primary);
+        }
+
+        .footer-social svg {
+            width: 24px;
+            height: 24px;
+            fill: currentColor;
+            display: block;
+        }
+
+        /* Accordion Animation */
+        details {
+            display: grid;
+            grid-template-rows: auto 0fr;
+            transition: grid-template-rows 0.3s ease-in-out;
+        }
+
+        details[open] {
+            grid-template-rows: auto 1fr;
+        }
+
+        details > *:not(summary) {
+            overflow: hidden;
+        }
+
+        /* Animate the accordion arrow rotation */
+        summary::after {
+            transition: transform 0.3s ease-in-out;
+        }
