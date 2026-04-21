@@ -38,6 +38,112 @@
     scroll-behavior: smooth;
 }
 
+/* ─── Light Mode Tokens ─────────────────────────────────────── */
+body.light {
+    --bg: #f8fafc;
+    --bg-surface: #f1f5f9;
+    --bg-card: #ffffff;
+    --bg-card-hover: #f1f5f9;
+
+    --text-primary: #0f172a;
+    --text-secondary: #475569;
+    --text-muted: #64748b;
+
+    --border: rgba(15,23,42,0.1);
+    --border-accent: rgba(99,102,241,0.4);
+
+    --shadow-card: 0 4px 24px rgba(0,0,0,0.08);
+    --shadow-glow: 0 0 32px rgba(99,102,241,0.12);
+    --accent-glow: rgba(99,102,241,0.18);
+
+    --pico-background-color: var(--bg);
+    --pico-color: var(--text-primary);
+}
+
+/* Header */
+body.light header.container {
+    background: rgba(248,250,252,0.88);
+}
+
+/* Noise overlay — reduce on light bg */
+body.light::before { opacity: 0.12; }
+
+/* Hero name gradient — white text invisible on light bg */
+body.light .hero-name {
+    background: linear-gradient(135deg, #0f172a 30%, var(--accent) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* Hero ambient glow — softer on light */
+body.light #hero::before {
+    background: radial-gradient(ellipse at center, rgba(99,102,241,0.07) 0%, transparent 65%);
+}
+
+/* Project tags — near-invisible rgba(255,255,255,0.04) on white */
+body.light .tag {
+    background: rgba(99,102,241,0.07);
+    color: #4338ca;
+    border-color: rgba(99,102,241,0.2);
+}
+
+/* Running card */
+body.light .running-card {
+    background: linear-gradient(135deg, #eef2ff 0%, #ede9fe 50%, #dbeafe 100%);
+}
+body.light .running-card h3 { color: #1e1b4b; }
+body.light .running-card p  { color: #3730a3; }
+body.light .stat-badge-outline {
+    background: rgba(252,76,2,0.1);
+    color: #c2410c;
+    border-color: rgba(252,76,2,0.3);
+}
+
+/* Skill dots — rgba(255,255,255,0.1) is invisible on white */
+body.light .dot {
+    background: #cbd5e1;
+    border-color: #94a3b8;
+}
+
+body.light .dot-filled {
+    background: var(--accent);
+    border-color: var(--accent);
+    box-shadow: 0 0 6px rgba(99,102,241,0.4);
+}
+
+/* Timeline dot border follows bg */
+body.light .timeline-dot {
+    border-color: var(--bg);
+}
+
+/* Footer social icons */
+body.light .footer-social a {
+    color: var(--text-secondary);
+    background: var(--bg-card);
+}
+body.light .footer-social a:hover { color: var(--accent); }
+
+/* Metric highlight */
+body.light .metric {
+    background: rgba(99,102,241,0.1);
+    color: #4338ca;
+}
+
+/* ─── Theme Transition Animation ────────────────────────────── */
+body.theme-transitioning,
+body.theme-transitioning *,
+body.theme-transitioning *::before,
+body.theme-transitioning *::after {
+    transition:
+        background-color 0.4s ease,
+        background 0.4s ease,
+        color 0.35s ease,
+        border-color 0.35s ease,
+        box-shadow 0.4s ease,
+        opacity 0.35s ease !important;
+}
+
 /* ─── Reset / Base ──────────────────────────────────────────── */
 *, *::before, *::after { box-sizing: border-box; }
 
@@ -152,6 +258,77 @@ header nav ul li a:hover {
     border-color: var(--border-accent);
     color: var(--text-primary);
     text-decoration: none;
+}
+
+#theme-toggle {
+    display: flex;
+    align-items: center;
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+.toggle-track {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 56px;
+    height: 28px;
+    border-radius: 100px;
+    background: #1e293b;
+    border: 1px solid rgba(255,255,255,0.1);
+    padding: 0 6px;
+    justify-content: space-between;
+    transition: background 0.3s ease, border-color 0.3s ease;
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.3);
+}
+
+body.light .toggle-track {
+    background: #e2e8f0;
+    border-color: rgba(0,0,0,0.1);
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.toggle-thumb {
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--accent-2);
+    box-shadow: 0 1px 4px rgba(0,0,0,0.35);
+    transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1), background 0.3s;
+    z-index: 1;
+}
+
+body.light .toggle-thumb {
+    transform: translateX(28px);
+    background: #f59e0b;
+    box-shadow: 0 1px 6px rgba(245,158,11,0.5);
+}
+
+.toggle-track .icon-moon {
+    color: #94a3b8;
+    position: relative;
+    z-index: 0;
+    flex-shrink: 0;
+}
+
+.toggle-track .icon-sun {
+    color: #64748b;
+    position: relative;
+    z-index: 0;
+    flex-shrink: 0;
+}
+
+body.light .toggle-track .icon-moon { color: #94a3b8; }
+body.light .toggle-track .icon-sun  { color: #f59e0b; }
+
+#theme-toggle:hover .toggle-track {
+    border-color: var(--border-accent);
 }
 
 /* ─── Hero Section ───────────────────────────────────────────── */
@@ -610,7 +787,6 @@ section h2 {
 }
 
 .timeline-content ul {
-    list-style: none;
     padding: 0;
     margin: 0;
     display: flex;
@@ -619,6 +795,7 @@ section h2 {
 }
 
 .timeline-content ul li {
+    list-style: none;
     font-size: 0.88rem;
     color: var(--text-secondary);
     padding-left: 1.25rem;
@@ -637,50 +814,96 @@ section h2 {
 /* ─── Skills ─────────────────────────────────────────────────── */
 .skills-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-    gap: 1rem;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.25rem;
 }
 
 .skill-group {
     background: var(--bg-card);
     border: 1px solid var(--border);
     border-radius: var(--radius-md);
-    padding: 1.25rem 1.5rem;
+    padding: 1.5rem 1.75rem;
     transition: border-color 0.2s;
+    position: relative;
+    overflow: hidden;
+}
+
+.skill-group::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--accent), var(--accent-2));
+    opacity: 0;
+    transition: opacity 0.25s;
 }
 
 .skill-group:hover { border-color: var(--border-accent); }
+.skill-group:hover::before { opacity: 1; }
 
 .skill-group h5 {
-    font-size: 0.78rem;
+    font-size: 0.72rem;
     font-weight: 600;
     text-transform: uppercase;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.12em;
     color: var(--accent-2);
-    margin-bottom: 0.85rem;
+    margin-bottom: 1.25rem;
 }
 
-.skill-tags {
+.skill-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
     display: flex;
-    flex-wrap: wrap;
-    gap: 0.4rem;
+    flex-direction: column;
+    gap: 0.85rem;
 }
 
-.skill-tag {
-    font-size: 0.78rem;
+.skill-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.skill-name {
+    font-size: 0.875rem;
     font-weight: 500;
     color: var(--text-secondary);
-    background: rgba(255,255,255,0.04);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-sm);
-    padding: 0.3rem 0.65rem;
-    transition: all 0.15s;
+    white-space: nowrap;
+    min-width: 110px;
 }
 
-.skill-tag:hover {
-    background: rgba(99,102,241,0.1);
-    border-color: var(--border-accent);
-    color: var(--accent-2);
+.skill-dots {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    flex-shrink: 0;
+}
+
+.dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.08);
+    transition: background 0.2s, transform 0.2s;
+}
+
+.dot-filled {
+    background: var(--accent);
+    border-color: var(--accent);
+    box-shadow: 0 0 6px var(--accent-glow);
+}
+
+.skill-item:hover .dot-filled {
+    background: var(--accent-2);
+    border-color: var(--accent-2);
+    transform: scale(1.2);
+}
+
+.skill-item:hover .skill-name {
+    color: var(--text-primary);
 }
 
 /* ─── Footer ─────────────────────────────────────────────────── */
